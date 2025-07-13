@@ -162,24 +162,24 @@ impl Default for ActiveHooks {
 //       call JS closures. Also, parallelism cannot be enabled for wasm targets, so
 //       not having Send+Sync isn't a problem.
 /// User-defined functions called by the physics engines during one timestep in order to customize its behavior.
-#[cfg(target_arch = "wasm32")]
-pub trait PhysicsHooks {
-    /// Applies the contact pair filter.
-    fn filter_contact_pair(&self, _context: &PairFilterContext) -> Option<SolverFlags> {
-        Some(SolverFlags::COMPUTE_IMPULSES)
-    }
+// #[cfg(target_arch = "wasm32")]
+// pub trait PhysicsHooks {
+//     /// Applies the contact pair filter.
+//     fn filter_contact_pair(&self, _context: &PairFilterContext) -> Option<SolverFlags> {
+//         Some(SolverFlags::COMPUTE_IMPULSES)
+//     }
 
-    /// Applies the intersection pair filter.
-    fn filter_intersection_pair(&self, _context: &PairFilterContext) -> bool {
-        true
-    }
+//     /// Applies the intersection pair filter.
+//     fn filter_intersection_pair(&self, _context: &PairFilterContext) -> bool {
+//         true
+//     }
 
-    /// Modifies the set of contacts seen by the constraints solver.
-    fn modify_solver_contacts(&self, _context: &mut ContactModificationContext) {}
-}
+//     /// Modifies the set of contacts seen by the constraints solver.
+//     fn modify_solver_contacts(&self, _context: &mut ContactModificationContext) {}
+// }
 
 /// User-defined functions called by the physics engines during one timestep in order to customize its behavior.
-#[cfg(not(target_arch = "wasm32"))]
+// #[cfg(not(target_arch = "wasm32"))]
 pub trait PhysicsHooks: Send + Sync {
     /// Applies the contact pair filter.
     ///
